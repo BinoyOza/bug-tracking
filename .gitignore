@@ -1,0 +1,19 @@
+### OSX
+.DS_Store
+
+### Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+### Django
+db.sqlite3
+*.log
+local_settings.py
+media/
+static/
+
+### IDE
+.idea
+.vscode
+admin_learn/
