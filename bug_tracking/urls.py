@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
+from projects.views import ProjectShowListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', ProjectShowListView.as_view(), name='index'),
     path('user/', include('accounts.urls')),
+    path('project/', include('projects.urls')),
+    path('bug/', include('bug_reports.urls')),
     path('logout/', LogoutView.as_view(), {'next_page': 'login'}, name='logout'),
     path('accounts/', include('django.contrib.auth.urls')),
 

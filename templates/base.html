@@ -21,40 +21,46 @@
 <div id="header">
   <h1><a href="dashboard.html">Matrix Admin</a></h1>
 </div>
-<!--close-Header-part--> 
+<!--close-Header-part-->
 
 
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
   <ul class="nav">
-    
+    {% if user.is_authenticated %}
+
     <li class=""><a title="" href="{% url 'logout' %}"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+    {% endif %}
   </ul>
 </div>
-<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+<div id="sidebar">
   <ul>
+    {% if user.is_authenticated %}
     <li class="active"><a href="#"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
-    <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>User</span> <span class="label label-important">2</span></a>
+    <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>User</span> <span class="label label-important">1</span></a>
       <ul>
-        <li><a href="#">User Create</a></li>
-        <li><a href="#">User List</a></li>
+        <li><a href="{% url 'userupdate' user.id%}">User Update</a></li>
       </ul>
     </li>
     <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>Project</span> <span class="label label-important">2</span></a>
       <ul>
-        <li><a href="#">Project Create</a></li>
-        <li><a href="#">Project List</a></li>
+        <li><a href="{% url 'projectcreate' %}">Project Create</a></li>
+        <li><a href="{% url 'projectlist' %}">Project List</a></li>
       </ul>
     </li>
-    <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>Audit</span> <span class="label label-important">4</span></a>
+    <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>Bug Report</span> <span class="label label-important">2</span></a>
       <ul>
-        <li><a href="#">Process Checklist Create</a></li>
-        <li><a href="#">Process Checklist Items</a></li>
-        <li><a href="#">Create Audit Report</a></li>
-        <li><a href="#">Audit Reports</a></li>
+        <li><a href="{% url 'bugreportcreate' %}">Bug Report Create</a></li>
+        <li><a href="{% url 'projectlist' %}">Project List</a></li>
       </ul>
     </li>
-
+    {% else %}
+    <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>Project Bug List</span> <span class="label label-important">1</span></a>
+      <ul>
+        <li><a href="{% url 'index' %}">Project List</a></li>
+      </ul>
+    </li>
+    {% endif %}
   </ul>
 </div>
 <!--sidebar-menu-->
@@ -63,7 +69,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
   </div>
 <!--End-breadcrumbs-->
 
@@ -93,13 +99,13 @@
 
       // if url is empty, skip the menu dividers and reset the menu selection to default
       if (newURL != "") {
-      
+
           // if url is "-", it is this page -- reset the menu:
           if (newURL == "-" ) {
-              resetMenu();            
-          } 
-          // else, send page to designated URL            
-          else {  
+              resetMenu();
+          }
+          // else, send page to designated URL
+          else {
             document.location.href = newURL;
           }
       }
@@ -110,20 +116,20 @@ function resetMenu() {
    document.gomenu.selector.selectedIndex = 2;
 }
 </script>
-<script src="{% static 'js/jquery.min.js' %}"></script> 
-<script src="{% static 'js/jquery.ui.custom.js' %}"></script> 
-<script src="{% static 'js/bootstrap.min.js' %}"></script> 
-<script src="{% static 'js/bootstrap-colorpicker.js' %}"></script> 
-<script src="{% static 'js/bootstrap-datepicker.js' %}"></script> 
-<script src="{% static 'js/jquery.toggle.buttons.js' %}"></script> 
-<script src="{% static 'js/masked.js' %}"></script> 
-<script src="{% static 'js/jquery.uniform.js' %}"></script> 
-<script src="{% static 'js/select2.min.js' %}"></script> 
-<script src="{% static 'js/matrix.js' %}"></script> 
-<script src="{% static 'js/matrix.form_common.js' %}"></script> 
-<script src="{% static 'js/wysihtml5-0.3.0.js' %}"></script> 
-<script src="{% static 'js/jquery.peity.min.js' %}"></script> 
-<script src="{% static 'js/bootstrap-wysihtml5.js' %}"></script> 
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery.ui.custom.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-colorpicker.js' %}"></script>
+<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'js/jquery.toggle.buttons.js' %}"></script>
+<script src="{% static 'js/masked.js' %}"></script>
+<script src="{% static 'js/jquery.uniform.js' %}"></script>
+<script src="{% static 'js/select2.min.js' %}"></script>
+<script src="{% static 'js/matrix.js' %}"></script>
+<script src="{% static 'js/matrix.form_common.js' %}"></script>
+<script src="{% static 'js/wysihtml5-0.3.0.js' %}"></script>
+<script src="{% static 'js/jquery.peity.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-wysihtml5.js' %}"></script>
 <script src="{% static 'js/matrix.charts.js' %}"></script>
 <script>
   $('.textarea_editor').wysihtml5();
