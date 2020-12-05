@@ -58,6 +58,8 @@ class ProjectShowListView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProjectShowListView, self).get_context_data(**kwargs)
         data = []
+        # import pdb
+        # pdb.set_trace()
         for project in Project.objects.all():
             data.append({
                 'title': project.title,
